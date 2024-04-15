@@ -1,15 +1,41 @@
 from datetime import datetime
 
 
+def listar_contas():
+    for conta in LISTA_CONTAS:
+        print(f"conta: {len(LISTA_CONTAS)} - Usuário: {conta['usario']['nome']}")
+
+
+def criar_conta():
+    listar_usuarios()
+
+    usuario = int(input("Escolha o usário para o qual deseja criar uma conta: "))
+
+    conta = {
+        'num_conta': len(LISTA_CONTAS) + 1,
+        'agencia': '0001',
+        'usario': LISTA_USUARIOS[usuario],
+        'saldo': 0,
+        'extrato': '',
+
+    }
+
+    LISTA_CONTAS.append(conta)
+
+
 def listar_usuarios():
+    index = 0
+    print("ID")
     for usuario in LISTA_USUARIOS:
-        print(usuario)
+        print(f"{index}\tNome: {usuario['nome']} CPF: {usuario['cpf']}")
+        index += 1
 
 
 def criar_usuario():
     def verifica_cpf_cadastrado_valido(usuario):
 
         lista_cpf = [usuario['cpf'] for usuario in LISTA_USUARIOS]
+
         if not usuario['cpf'].isdigit():
             print("\n\n Campo CPF aceita apenas valores numéricos")
             return False
@@ -31,6 +57,7 @@ def criar_usuario():
         LISTA_USUARIOS.append(novo_usuario)
     else:
         print("\n\nOperação Falhou")
+
 
 def exibir_extrato(*args, **kwargs):
     print("\n================ EXTRATO ================")
