@@ -7,15 +7,30 @@ def listar_usuarios():
 
 
 def criar_usuario():
+    def verifica_cpf_cadastrado_valido(usuario):
+
+        lista_cpf = [usuario['cpf'] for usuario in LISTA_USUARIOS]
+        if not usuario['cpf'].isdigit():
+            print("\n\n Campo CPF aceita apenas valores numéricos")
+            return False
+
+        elif usuario['cpf'] not in lista_cpf:
+            return True
+        else:
+            print("\n\nO CPF deste usuário já está cadastrado !")
+            return False
+
     novo_usuario = {
         'nome': input("Informe o nome: "),
         'data_nascimento': input("Informe a data de nascimento: "),
         'cpf': input("Informe o CPF: "),
-        'endereco': input("informe o endereço")
+        'endereco': input("informe o endereço no formato <<Logradouro, número - bairro - cidade/sigla>>: ")
     }
 
-    LISTA_USUARIOS.append(novo_usuario)
-
+    if verifica_cpf_cadastrado_valido(novo_usuario):
+        LISTA_USUARIOS.append(novo_usuario)
+    else:
+        print("\n\nOperação Falhou")
 
 def exibir_extrato(*args, **kwargs):
     print("\n================ EXTRATO ================")

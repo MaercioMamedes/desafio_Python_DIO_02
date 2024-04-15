@@ -13,14 +13,14 @@ Desafio 01 do Bootcamp Python AI Backend Developer - Vivo - Digital Innovation O
        * argumento nomeado: **extrato**
 2. ### Criar mais duas funcionalidades para a aplicação:
    - #### Criar Usuário(cliente do Banco)
-     - O programa deve armazenar os usuários numa lista
+     - :white_check_mark: O programa deve armazenar os usuários numa lista
      - um Usuário é composto por:
-       - Nome
-       - data de nascimento
-       - cpf
-       - endereço (string: `Logradouro, número - bairro - cidade/sigla`)
-     - Deve ser armazenado somente os números do CPF
-     - Não é permitido 2 usuários com o mesmo CPF
+       - :white_check_mark: Nome
+       - :white_check_mark: data de nascimento
+       - :white_check_mark: cpf
+       - white_check_mark: endereço (string: `Logradouro, número - bairro - cidade/sigla`)
+     - :white_check_mark: Deve ser armazenado somente os números do CPF
+     - :white_check_mark: Não é permitido 2 usuários com o mesmo CPF
    - #### criar Conta Correte( vinculada a um Usuário)
      - O programa deve armazenar contas em uma lista
      - uma conta é composta por:
