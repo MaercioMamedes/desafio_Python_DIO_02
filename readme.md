@@ -1,16 +1,16 @@
 Desafio 01 do Bootcamp Python AI Backend Developer - Vivo - Digital Innovation One
 
-## TODO
+## ToDo
 
 1. ### Modularizar o código criando funções para as operações: 
    - #### depositar
-     - Deve receber os argumentos apenas por posição
+     - :white_check_mark: Deve receber os argumentos apenas por posição: `saldo, valor, extrato`
    - #### sacar
-     - Deve receber os argumentos apenas por nome
+     - :white_check_mark: Deve receber os argumentos apenas por nome: `saldo, valor, extrato, numero_saques, limite_saques`
    - #### extrato
      - Deve receber os argumentos por posição e nome
-       * argumento posicional: **saldo**
-       * argumento nomeado: **extrato**
+       * :white_check_mark: argumento posicional: **saldo**
+       * :white_check_mark: argumento nomeado: **extrato**
 2. ### Criar mais duas funcionalidades para a aplicação:
    - #### Criar Usuário(cliente do Banco)
      - :white_check_mark: O programa deve armazenar os usuários numa lista

@@ -15,12 +15,14 @@ def criar_conta():
         'num_conta': len(LISTA_CONTAS) + 1,
         'agencia': '0001',
         'usario': LISTA_USUARIOS[usuario],
+        'numero_saques': 0,
         'saldo': 0,
         'extrato': '',
 
     }
 
     LISTA_CONTAS.append(conta)
+    print("conta cadastrada com sucesso")
 
 
 def listar_usuarios():
@@ -55,20 +57,23 @@ def criar_usuario():
 
     if verifica_cpf_cadastrado_valido(novo_usuario):
         LISTA_USUARIOS.append(novo_usuario)
+        print("Usuário Cadastrado com sucesso !")
     else:
         print("\n\nOperação Falhou")
 
 
-def exibir_extrato(*args, **kwargs):
+def exibir_extrato(saldo, extrato):
     print("\n================ EXTRATO ================")
     print("Não foram realizadas movimentações." if not extrato else extrato)
     print(f"\nSaldo: R$ {saldo:.2f}")
     print("==========================================")
 
 
-def depositar(*args):
+def depositar(saldo, extrato):
+
     # tratamento de erro para valores incorreto para depósito
     try:
+
         valor = float(input("Informe o valor para depósito: "))
 
         if valor > 0:
@@ -79,7 +84,8 @@ def depositar(*args):
             # Formatar a data e hora
             data_hora_formatada = agora.strftime("%d-%m-%Y %H:%M")
 
-            extrato += f"{data_hora_formatada} - Depósito: R$ {valor:.2f} \n"
+            extrato = f"{data_hora_formatada} - Depósito: R$ {valor:.2f} \n"
+            return saldo, extrato
 
         else:
             print("valor não pode ser negativo")
@@ -88,7 +94,7 @@ def depositar(*args):
         print("Operação falhou! O valor informado é inválido.")
 
 
-def sacar(**kwargs):
+def sacar(saldo, extrato, numero_saques_realizados):
     try:
 
         valor = float(input("Informe o valor para o saque: "))
@@ -117,6 +123,7 @@ def sacar(**kwargs):
 
             extrato += f"{data_hora_formatada} - Saque: R$ {valor:.2f}\n"
             numero_saques_realizados += 1
+            return saldo, extrato
 
         else:
             print("Operação falhou! O valor informado não pode ser negativo")
@@ -159,15 +166,33 @@ Escolha uma opção:
 
         # opção de depósito
         if opcao == "1":
-            depositar(saldo)
+            print("ESCOLHA A CONTA PARA REALIZAR O DEPÓSITO\n")
+            listar_contas()
+            index_conta = int(input("digite o número da conta: "))
+            conta = LISTA_CONTAS[index_conta - 1]
+            resultado_operacao = depositar(conta['saldo'], conta['extrato'])
+            conta['saldo'] = resultado_operacao[0]
+            conta['extrato'] += resultado_operacao[1]
+            print("Depósito realizado com sucesso!\n")
 
         # opção de saque
         elif opcao == "2":
-            sacar(saldo=saldo)
+            print("ESCOLHA A CONTA PARA REALIZAR O SAQUE\n")
+            listar_contas()
+            index_conta = int(input("digite o número da conta: "))
+            conta = LISTA_CONTAS[index_conta - 1]
+            resultado_operacao = sacar(saldo=conta['saldo'], extrato=conta['extrato'], numero_saques_realizados=conta['numero_saques'])
+            conta['saldo'] = resultado_operacao[0]
+            conta['extrato'] += resultado_operacao[1]
+            conta['numero_saques'] += 1
+            print("Saque realizado com sucesso!\n")
 
         # opção para exibir extrato
         elif opcao == "3":
-            exibir_extrato(extrato)
+            listar_contas()
+            index_conta = int(input("digite o número da conta: "))
+            conta = LISTA_CONTAS[index_conta - 1]
+            exibir_extrato(conta['saldo'], extrato=conta['extrato'])
 
         elif opcao == "4":
             criar_usuario()
@@ -193,6 +218,8 @@ if __name__ == '__main__':
     # constantes do sistema
     global LIMITE_SAQUE
     global QTD_SAQUES_LIMITE
+
+    # lista de usuários e contas
     global LISTA_USUARIOS
     global LISTA_CONTAS
 
