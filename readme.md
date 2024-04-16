@@ -1,4 +1,4 @@
-Desafio 01 do Bootcamp Python AI Backend Developer - Vivo - Digital Innovation One
+Desafio 02 do Bootcamp Python AI Backend Developer - Vivo - Digital Innovation One
 
 ## ToDo
 
